@@ -1,0 +1,20 @@
+To add these assets, log into the SV07 via WinSCP
+Username: mks, Password: makerbase
+Navigate to /home/mks/KlipperScreen/panels and paste the temperature.py. This will scale down the icons and change the order from Bed temp/Extruder temp to Extruder temp/Bed temp, to match the order above
+Navigate to /home/mks/KlipperScreen/styles and paste the PETG.png and TPU.png files into your chosen theme (or all of the themes)
+Navigate to /home/mks/KlipperScreen and add these two presets into KlipperScreen.conf
+
+[preheat PETG]
+bed = 70
+extruder = 240
+
+[preheat TPU]
+bed = 50
+extruder = 210
+
+If you want to keep the icons and add additional filaments, you need to open one of the .png files in GIMP (or similar), change the text, save the file as {name of filament}.png (eg PLACF.png). If you want to eliminate the icons and just display the name of the button, without the temperatures, navigate into temperature.py and change this:
+self.labels[option] = self._gtk.Button(image_name=option, label= preheat_config, scale=2.25, style=f"color{(i % 4) + 1}")
+
+to this:
+self.labels[option] = self._gtk.Button(label= option, scale=2.25, style=f"color{(i % 4) + 1}")
+
